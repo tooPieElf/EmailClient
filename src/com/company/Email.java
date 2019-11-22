@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.Scanner;
+import java.math.*;
 import jdk.swing.interop.SwingInterOpUtils;
 
 public class Email {
@@ -11,13 +12,17 @@ public class Email {
   private int mailBoxCapacity;
   private String alternateEmail;
 
+
+  //Email constructor.
   public Email(String firstname, String lastname) {
     this.firstname = firstname;
     this.lastname = lastname;
     this.department = setDepartment();
+    this.password = setPassword(15);
     System.out.println("Email created "+ this.firstname+" "+this.lastname);
-    System.out.println("Department :"+ this.department);
-// call department and return department.
+    System.out.println("Department is "+ this.department);
+    System.out.println("Passwod is "+ this.password);
+
 
   }
 
@@ -30,6 +35,18 @@ public class Email {
     if(deptChoice==1){return "sales";}
     else if(deptChoice==2){return "developement";}
     else if(deptChoice ==3){return "Account";}
-    else{return "";}
+    else{return "no department specified";}
   }
+  private String setPassword(int passwordLength){
+    String seed = "abcdefghijklmnopqrstuvwxyzABCDEFHIJKLMNOPQRSTUVWXYZ@##$%^&*(){}><?"+this.firstname+this.lastname;
+    char[] value = new char[passwordLength];
+    for(int i =0;i<passwordLength;i++){
+      int randNum = (int) (Math.random()*seed.length());
+      value[i]=seed.charAt(randNum);
+      System.out.println(randNum);
+    }
+    return  new String(value);
+  }
+
+
 }
