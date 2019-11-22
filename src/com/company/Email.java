@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.Scanner;
+import jdk.swing.interop.SwingInterOpUtils;
 
 public class Email {
   private String firstname;
@@ -15,13 +16,15 @@ public class Email {
     this.lastname = lastname;
     this.department = setDepartment();
     System.out.println("Email created "+ this.firstname+" "+this.lastname);
+    System.out.println("Department :"+ this.department);
 // call department and return department.
+
   }
 
   private  String setDepartment() {
 
-    System.out.println("enter the students department please \n1 for sales \n 2 for department"
-        + "\n 3 for Acconting\n 0 for Name");
+    System.out.println("DEPARTMENT CODES:  \n1 for sales \n 2 for department"
+        + "\n 3 for Acconting\n 0 for Name\n enter the students department please\n");
     Scanner in =new Scanner(System.in);
     int deptChoice = in.nextInt();
     if(deptChoice==1){return "sales";}
