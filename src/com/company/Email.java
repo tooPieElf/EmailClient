@@ -5,13 +5,14 @@ import java.math.*;
 import jdk.swing.interop.SwingInterOpUtils;
 
 public class Email {
+
   private String firstname;
   private String lastname;
   private String password;
   private String department;
   private String email;
-  private int defaultPasswordLength=10;
-  private int mailBoxCapacity=500;
+  private int defaultPasswordLength = 10;
+  private int mailBoxCapacity = 500;
   private String alternateEmail;
 
 
@@ -50,7 +51,6 @@ public class Email {
   }
 
 
-
   //Email constructor for first and last name.
   public Email(String firstname, String lastname) {
     this.firstname = firstname;
@@ -60,40 +60,49 @@ public class Email {
     this.email = setEmail();
 
 
-
   }
 
-  private  String setDepartment() {
+  private String setDepartment() {
 
     System.out.print("DEPARTMENT CODES:  \n1 for sales \n 2 for department"
         + "\n 3 for Acconting\n 0 for None\n enter the department code :");
-    Scanner in =new Scanner(System.in);
+    Scanner in = new Scanner(System.in);
     int deptChoice = in.nextInt();
-    if(deptChoice==1){return "sales";}
-    else if(deptChoice==2){return "developement";}
-    else if(deptChoice ==3){return "Account";}
-    else{return "no department specified"; }
-  }
-  private String setPassword(int passwordLength){
-    String seed = "abcdefghijklmnopqrstuvwxyzABCDEFHIJKLMNOPQRSTUVWXYZ@##$%^&*(){}><?"+this.firstname+this.lastname;
-    char[] value = new char[passwordLength];
-    for(int i =0;i<passwordLength;i++){
-      int randNum = (int) (Math.random()*seed.length());// note the position of the brackets. it could be buggy.
-      value[i]=seed.charAt(randNum);
+    if (deptChoice == 1) {
+      return "sales";
+    } else if (deptChoice == 2) {
+      return "developement";
+    } else if (deptChoice == 3) {
+      return "Account";
+    } else {
+      return "no department specified";
     }
-    return  new String(value);
   }
-// Next task is to auto generate email based on the username.
-private String setEmail(){
 
-    return this.lastname.toLowerCase()+"."+this.firstname.toLowerCase()+"@"+"gmail.com";
-}
+  private String setPassword(int passwordLength) {
+    String seed =
+        "abcdefghijklmnopqrstuvwxyzABCDEFHIJKLMNOPQRSTUVWXYZ@##$%^&*(){}><?" + this.firstname
+            + this.lastname;
+    char[] value = new char[passwordLength];
+    for (int i = 0; i < passwordLength; i++) {
+      int randNum = (int) (Math.random() * seed
+          .length());// note the position of the brackets. it could be buggy.
+      value[i] = seed.charAt(randNum);
+    }
+    return new String(value);
+  }
 
-public String show(){
-    return  "DISPLAY NAME  :" +firstname+" "+lastname+'\n'+
-             "COMPANY EMAIL :" + email +'\n'+
-            "ALTRNATE EMAIL :" +alternateEmail+'\n'+
-             "MAILBOX CAPACITY :"+ mailBoxCapacity + "mb"+ '\n'+
-             "PASSWORD :"+ password ;
+  // Next task is to auto generate email based on the username.
+  private String setEmail() {
+
+    return this.lastname.toLowerCase() + "." + this.firstname.toLowerCase() + "@" + "gmail.com";
+  }
+
+  public String show() {
+    return "DISPLAY NAME  :" + firstname + " " + lastname + '\n' +
+        "COMPANY EMAIL :" + email + '\n' +
+        "ALTRNATE EMAIL :" + alternateEmail + '\n' +
+        "MAILBOX CAPACITY :" + mailBoxCapacity + "mb" + '\n' +
+        "PASSWORD :" + password;
   }
 }
