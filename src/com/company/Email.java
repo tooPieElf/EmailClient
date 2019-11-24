@@ -9,21 +9,56 @@ public class Email {
   private String lastname;
   private String password;
   private String department;
-  private int mailBoxCapacity;
+  private String email;
+  private int defaultPasswordLength=10;
+  private int mailBoxCapacity=500;
   private String alternateEmail;
 
 
-  //Email constructor.
+  public void setDefaultPasswordLength(int defaultPasswordLength) {
+    this.defaultPasswordLength = defaultPasswordLength;
+
+    // find out why this isnt setting the password in the setter
+  }
+
+  public void setMailBoxCapacity(int mailBoxCapacity) {
+    this.mailBoxCapacity = mailBoxCapacity;
+  }
+
+  public void setAlternateEmail(String alternateEmail) {
+    this.alternateEmail = alternateEmail;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
+  public String getPassword() {
+    return password;
+  }
+
+  public int getDefaultPasswordLength() {
+    return defaultPasswordLength;
+  }
+
+  public int getMailBoxCapacity() {
+    return mailBoxCapacity;
+  }
+
+  public String getAlternateEmail() {
+    return alternateEmail;
+  }
+
+
+
+  //Email constructor for first and last name.
   public Email(String firstname, String lastname) {
     this.firstname = firstname;
     this.lastname = lastname;
     this.department = setDepartment();
-    this.password = setPassword(15);
-    this.alternateEmail = setEmail();
-    System.out.println("Email created "+ this.firstname+" "+this.lastname);
-    System.out.println("Department is "+ this.department);
-    System.out.println("Passwod is "+ this.password);
-    System.out.println("email is "+ this.alternateEmail);
+    this.password = setPassword(defaultPasswordLength);
+    this.email = setEmail();
+
 
 
   }
@@ -31,13 +66,13 @@ public class Email {
   private  String setDepartment() {
 
     System.out.print("DEPARTMENT CODES:  \n1 for sales \n 2 for department"
-        + "\n 3 for Acconting\n 0 for Name\n enter the students department please");
+        + "\n 3 for Acconting\n 0 for None\n enter the department code :");
     Scanner in =new Scanner(System.in);
     int deptChoice = in.nextInt();
     if(deptChoice==1){return "sales";}
     else if(deptChoice==2){return "developement";}
     else if(deptChoice ==3){return "Account";}
-    else{return "no department specified";}
+    else{return "no department specified"; }
   }
   private String setPassword(int passwordLength){
     String seed = "abcdefghijklmnopqrstuvwxyzABCDEFHIJKLMNOPQRSTUVWXYZ@##$%^&*(){}><?"+this.firstname+this.lastname;
@@ -51,6 +86,14 @@ public class Email {
 // Next task is to auto generate email based on the username.
 private String setEmail(){
 
-    return this.lastname+"."+this.firstname+"@"+"gmail.com";
+    return this.lastname.toLowerCase()+"."+this.firstname.toLowerCase()+"@"+"gmail.com";
 }
+
+public String show(){
+    return  "DISPLAY NAME  :" +firstname+" "+lastname+'\n'+
+             "COMPANY EMAIL :" + email +'\n'+
+            "ALTRNATE EMAIL :" +alternateEmail+'\n'+
+             "MAILBOX CAPACITY :"+ mailBoxCapacity + "mb"+ '\n'+
+             "PASSWORD :"+ password ;
+  }
 }
